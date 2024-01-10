@@ -1,0 +1,8 @@
+
+.delete-all-btn {
+    border: 0;
+    background-color: rgb(252, 160, 85);
+    padding: 10px 15px;
+    color: white;
+    border-radius: 5px;
+}

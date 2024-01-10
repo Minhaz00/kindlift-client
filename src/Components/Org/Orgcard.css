@@ -1,0 +1,14 @@
+.cardHeader{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    height: 100px;
+}
+
+.cardHeader > img{
+    height: 70px;
+    width: 70px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    margin-right: 10px;
+}

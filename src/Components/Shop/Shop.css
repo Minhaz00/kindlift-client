@@ -1,0 +1,21 @@
+.products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.shop { 
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    margin-left: 5px;
+}
+
+.cart {
+    background-color: #ffffff;
+    padding: 10px;
+    margin-right: 5px;
+    border-radius: 10px;
+    border: 2px solid black;
+    height: 400px;
+    position: sticky;
+    top: 20px;
+}
