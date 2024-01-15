@@ -1,0 +1,29 @@
+.footerImg{
+    width: 10%;
+    height: 10%;
+    margin: 10px;
+
+}
+
+.carImg{
+    height: 150px;
+    width: 230px;
+    margin: 10px auto;
+}
+
+.carosel-container{
+    width: 230px;
+}
+
+.social-links a{
+    text-decoration: none;
+    color: rgb(39, 35, 35);
+    /* font-size: small; */
+}
+
+
+@media only screen and (max-width: 600px) {
+    .footer {
+        visibility: hidden;
+    }
+  }

@@ -1,11 +1,39 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Container, Form, Nav, Navbar, Dropdown, Image } from 'react-bootstrap';
 import logo from '../../Assets/Images/Logo/logoKindlift.png'
-import demoDp from '../../Assets/Images/Logo/user.png'
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import './Header.css'
+import { AuthContext } from '../Context/AuthProvider';
+import demoDp from '../../Assets/Images/Logo/user.png'
 
 const Header = () => {
+
+
+    const { user, logout } = useContext(AuthContext);
+    console.log(user?.uid)
+    const navigate = useNavigate();
+
+    const [usr, setUsr] = useState([]);
+    useEffect(() => {
+        fetch(`http://localhost:5000/user/${user?.uid}`)
+            .then(res => res.json())
+            .then(data => {
+                setUsr(data[0])
+                console.log(data[0])
+            });
+    }, [user]);
+
+    const handleSignOut = () => {
+        logout()
+            .then(() => console.log("logged out successfully!"))
+            .catch((error) => console.error(error));
+        
+        navigate('/')
+    }
+    
+
+
+
     return (
         <div className='navbar border-secondary-subtle'>
             <Navbar expand="lg">
@@ -30,12 +58,12 @@ const Header = () => {
                         
                         <Navbar.Text>
                             
-                            {1=== 1?
+                            {(user && usr)?
                                 <div className='d-flex'> 
                                     <Dropdown>  
                                         <Dropdown.Toggle  className='py-0' variant=""  id="dropdown-basic">
-                                            {1 == 0 ?
-                                                <Image className=' me-2' style={{ width: "40px", height: "40px"}} roundedCircle src={demoDp}></Image>
+                                            {(usr?.photoURL) ?
+                                                <Image className=' me-2' style={{ width: "40px", height: "40px"}} roundedCircle src={usr.photoURL}></Image>
                                                 :
                                                 <Image className=' me-2' style={{ width: "40px", height: "40px"}} roundedCircle src={demoDp}></Image>
                                             }
@@ -46,7 +74,7 @@ const Header = () => {
                                                 <Link className='ps-2 py-0 text-decoration-none d-block w-100'><small>My profile</small></Link>
                                             </Dropdown.Item>
 
-                                            <Dropdown.Item className='px-0 d-block w-100 border-bottom' >
+                                            <Dropdown.Item className='px-0 d-block w-100 border-bottom' onClick={handleSignOut}>
                                                 <p className='mb-0 py-0 ps-2 text-danger'><small>Logout</small></p>
                                             </Dropdown.Item>
                                         </Dropdown.Menu>
@@ -58,7 +86,7 @@ const Header = () => {
                                         <button className='ms-2 btn btn-outline-dark py-1'>Login</button>
                                     </Link>
                                     <Link to={`/register`}>
-                                        <button className='ms-2 btn btn-outline-dark py-1'>Signup</button>
+                                        <button className='ms-2 btn btn-dark py-1'>Signup</button>
                                     </Link>
                                 </>
                             }

@@ -65,13 +65,6 @@ const EventDetails = () => {
                 Topic: "Unlocking the Potential of Blockchain:
                 Revolutionizing Industries"
             </small>
-            
-            <h6 className='mt-5'>Event Host: </h6>
-            <small>CUET computer club</small>
-            
-            <h6 className='mt-5'>Event platform: </h6>
-            <small>Zoom <br /> [link will be provided soon]
-            </small>
 
 
             <h6 className='mt-5'>Event date & time: </h6>

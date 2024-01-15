@@ -1,0 +1,9 @@
+.login{
+    width: 35%;
+    padding: 20px 3% 5%;
+}
+
+.login a{
+    text-decoration: none;
+    color: rgb(113, 38, 122);
+}

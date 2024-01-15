@@ -1,9 +1,17 @@
 import React from 'react';
+import HomeBanner from './HomeBanner';
+import Kindliftinfobanner from './Kindliftinfobanner';
 
 const Home = () => {
     return (
         <div>
-            this is Home
+            <HomeBanner/>
+            <Kindliftinfobanner/>
+
+            <div className='contact'>
+                
+            </div>
+
         </div>
     );
 };

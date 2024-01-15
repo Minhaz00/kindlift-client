@@ -10,6 +10,12 @@ import Main from "../Layout/Main";
 import EventDetails from "../Components/Events/EventDetails";
 import ProductDetails from "../Components/Shop/ProductDetails";
 import OrgDetails from "../Components/Org/OrgDetails";
+import Orders from "../Components/Shop/Orders";
+import { productAndCartLoader } from "../Utilities/ProductAndCart";
+import OrderSuccess from "../Components/Shop/OrderSuccess";
+import Donate from "../Components/Org/Donate";
+import PrivateRoute from "./PrivateRoute";
+import Orderfail from "../Components/Shop/Orderfail";
 
 
 
@@ -25,11 +31,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/feed',
-                element: <Feed></Feed> ,
+                element: <PrivateRoute><Feed></Feed></PrivateRoute> ,
+                loader: () => fetch('http://localhost:5000/posts')
             },
             {
                 path: '/orgs',
-                element: <Org></Org> ,
+                element: <PrivateRoute><Org></Org></PrivateRoute> ,
                 loader: () => fetch('http://localhost:5000/orgs')
             },
             {
@@ -46,13 +53,13 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/events/:id',
-                element: <EventDetails></EventDetails>,
+                element: <PrivateRoute><EventDetails></EventDetails></PrivateRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/events/${params.id}`)
                 
             },
             {
                 path: '/Shop',
-                element: <Shop></Shop>,
+                element: <PrivateRoute><Shop></Shop></PrivateRoute> ,
                 loader: () => fetch('http://localhost:5000/products')
                 
             },
@@ -61,6 +68,24 @@ export const router = createBrowserRouter([
                 element: <ProductDetails></ProductDetails>,
                 loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
                 
+            },
+            {
+                path: '/orders',
+                element: <Orders></Orders>,
+                loader: productAndCartLoader,
+            },
+            {
+                path: '/payment/success/:trans_id',
+                element: <OrderSuccess></OrderSuccess>,
+            },
+            {
+                path: '/payment/fail',
+                element: <Orderfail></Orderfail>,
+            },
+            {
+                path: '/donate/:id',
+                element: <PrivateRoute><Donate></Donate></PrivateRoute>,
+                loader: ({params}) => fetch(`http://localhost:5000/orgs/${params.id}`)
             },
 
             // {
